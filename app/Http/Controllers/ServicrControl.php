@@ -9,20 +9,19 @@ class ServicrControl extends Controller
 {
     /**
      * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $services = DB::table('services')->get();
-        return view('pages.addService',compact('services'));
-    }
+    //  */
+    // public function index()
+    // {
+    //     $services = DB::table('services')->get();
+    //     return view('pages.serviceAction',compact('services'));
+    // }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-
-        return view('pages.addService');
+        //
     }
 
     /**
@@ -52,11 +51,13 @@ class ServicrControl extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        // $editServ = DB::table('services')->where('id' , $id)->first();
-        // return view('pages.etditService' , compact('editServ'));
-    }
+    // public function edit(string $id)
+    // {
+    //     // $service = DB::table('services')->where('id' , $id)->first();
+    //     // return view('pages.updateServe' , compact('service'));
+
+    //     return 'this is edit';
+    // }
 
     /**
      * Update the specified resource in storage.

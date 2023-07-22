@@ -129,19 +129,9 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="{{url('addserve')}}" class="menu-link">
+                  <a href="{{route('showServe')}}" class="menu-link">
                     {{-- <div data-i18n="Account">Account</div> --}}
-                    Add Services
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="pages-account-settings-notifications.html" class="menu-link">
-                    <div data-i18n="Notifications">Notifications</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="pages-account-settings-connections.html" class="menu-link">
-                    <div data-i18n="Connections">Connections</div>
+                    Service Action
                   </a>
                 </li>
               </ul>
@@ -149,22 +139,12 @@
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-                <div data-i18n="Authentications">Authentications</div>
+                <div data-i18n="Authentications">Categories</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="auth-login-basic.html" class="menu-link" target="_blank">
-                    <div data-i18n="Basic">Login</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="auth-register-basic.html" class="menu-link" target="_blank">
-                    <div data-i18n="Basic">Register</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="auth-forgot-password-basic.html" class="menu-link" target="_blank">
-                    <div data-i18n="Basic">Forgot Password</div>
+                  <a href="{{route('show')}}" class="menu-link" target="_blank">
+                    <div data-i18n="Basic">Ctegorie Action</div>
                   </a>
                 </li>
               </ul>
@@ -172,12 +152,13 @@
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-cube-alt"></i>
-                <div data-i18n="Misc">Misc</div>
+                {{-- <i class="menu-icon tf-icons fa-regular fa-user "></i> --}}
+                <div data-i18n="Misc">Gestion d'utilurateure</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
                   <a href="pages-misc-error.html" class="menu-link">
-                    <div data-i18n="Error">Error</div>
+                    <div data-i18n="Error">utilisateur Action</div>
                   </a>
                 </li>
                 <li class="menu-item">
@@ -186,6 +167,20 @@
                   </a>
                 </li>
               </ul>
+
+              <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                  <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                  <div data-i18n="Account Settings">Gestion structure</div>
+                </a>
+                <ul class="menu-sub">
+                  <li class="menu-item">
+                    <a href="{{url('structure')}}" class="menu-link">
+                      <div data-i18n="Account">structure Action</div>
+                    </a>
+                  </li>
+                </ul>
+              </li>
             </li>
             <!-- Components -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
@@ -436,5 +431,8 @@
 
     <!-- Core JS -->
 @include('layouts.scripts')
+<script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+
   </body>
 </html>
