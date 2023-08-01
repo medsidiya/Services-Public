@@ -35,6 +35,10 @@
                     <label for="">catgorie id</label>
                     <input type="text" class="form-control" name="cteg_id" id=""  value="{{$service->cteg_id}}">
                 </div>
+                <div class="form-group mb-2">
+                    <label for="">catgorie id</label>
+                    <input type="text" class="form-control" name="struct_id" id=""  value="{{$service->struct_id}}">
+                </div>
             </div>
               <div class="modal-footer">
                 <button type="close" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

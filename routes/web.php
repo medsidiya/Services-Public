@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoyController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,15 +18,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-})->name("welcome");
+    return view('Accueil');
+})->name("Accueil");
 
 Route::get('layout.master', function () {
     return view('layout.master');
 })->name("master");
 
 
-Route::get('services',[CategoyController::class , 'affiche'] );
+Route::get('categorie',[CategoyController::class , 'affiche'] );
+Route::get('transport/{id}',[ServiceController::class , 'transport'] );
+Route::get('transport/imprimer/{id}',[ServiceController::class , 'imprimer'] );
+Route::get('transport/imprimer/print/{id}',[ServiceController::class , 'print'] );
 
 Route::get('admin/dashbord', function () {
     return view('admin');
@@ -35,6 +39,14 @@ Route::get('admin/dashbord', function () {
 Route::get('/contact', function () {
     return view("contact");
 });
+Route::get('/transport', function () {
+    return view("/transport");
+})->name('more');
+
+
+Route::get('/education', function () {
+    return view("/education");
+})->name('education');
 
 Route::get('auth', function () {
     return view("layouts.auth");
@@ -44,9 +56,9 @@ Route::get('layouts/app', function () {
     return view("app");
 })->name("home");
 
-Route::get('pages/auth', function () {
-    return view("addService");
-})->name("addService");
+Route::get('auth', function () {
+    return view("layouts/auth");
+})->name("auth");
 
 Route::get('addService', function () {
     return view("pages.addService");
@@ -60,47 +72,67 @@ Route::get('update', function () {
     return view("pages.update");
 })->name("update");
 
-Route::get('addCategorie', function () {
-    return view("pages.addCategorie");
-})->name("addCategorie");
+// Route::get('addCategorie', function () {
+//     return view("pages.addCategorie");
+// })->name("addCategorie");
 
-Route::get('updateServe', function () {
-    return view("pages.updateServe");
-})->name("updateServe");
+// Route::get('updateServe', function () {
+//     return view("pages.updateServe");
+// })->name("updateServe");
 
-Route::get('serviceAction', function () {
-    return view("pages/serviceAction");
-})->name("serviceAction");
+// Route::get('serviceAction', function () {
+//     return view("pages/serviceAction");
+// })->name("serviceAction");
 
-Route::get('pages/categorieAction', function () {
-    return view("pages/categorieAction");
-})->name("categorie");
+// Route::get('categorieAction', function () {
+//     return view("pages/categorieAction");
+// })->name("categorie");
 
-
-
-Route::view('about', 'about');
 Route::view('login', 'login');
-Route::view('admin', 'admin/dashbord');
-Route::view('create', 'posts/create');
+Route::view('about', 'about');
 
 
-Route::get('serviceAction/index', [App\Http\Controllers\ServiceController::class, 'index'])->name('showServe');
-Route::post('serviceAction/add', [App\Http\Controllers\ServiceController::class, 'add'])->name('addServe');
-Route::get('serviceAction/edit/{id}', [App\Http\Controllers\ServiceController::class, 'edit'])->name('editServe');
-Route::post('serviceAction/update/{id}', [App\Http\Controllers\ServiceController::class, 'update'])->name('updateServe');
-Route::get('serviceAction/delate/{id}', [App\Http\Controllers\ServiceController::class, 'delate'])->name('delateServe');
 
+Route::middleware(['auth'])->group(function () {
 
-Route::get('categorieAction/index', [App\Http\Controllers\CategoyController::class, 'index'])->name('show');
-Route::post('categorieAction/add', [App\Http\Controllers\CategoyController::class, 'insert'])->name('addCategorie');
-Route::get('categorieAction/edit/{id}', [App\Http\Controllers\CategoyController::class, 'edit'])->name('editCategorie');
-Route::post('categorieAction/update/{id}', [App\Http\Controllers\CategoyController::class, 'update'])->name('updateCategorie');
-Route::get('categorieAction/delate/{id}', [App\Http\Controllers\CategoyController::class, 'delate'])->name('delateCategorie');
+        Route::prefix('categorieAction')->group(function () {
 
+        Route::get('/', [App\Http\Controllers\CategoyController::class, 'index'])->name('show');
+        Route::post('/add', [App\Http\Controllers\CategoyController::class, 'insert'])->name('addCategorie');
+        Route::get('/edit/{id}', [App\Http\Controllers\CategoyController::class, 'edit'])->name('editCategorie');
+        Route::post('/update/{id}', [App\Http\Controllers\CategoyController::class, 'update'])->name('updateCategorie');
+        Route::post('/delate/{id}', [App\Http\Controllers\CategoyController::class, 'delate'])->name('delateCategorie');
+        Route::post('/search', [App\Http\Controllers\CategoyController::class, 'search'])->name('searchCategory');
+    });
+
+        Route::prefix('serviceAction')->group(function () {
+
+            Route::get('/', [App\Http\Controllers\ServiceController::class, 'index'])->name('showServe');
+            Route::post('/add', [App\Http\Controllers\ServiceController::class, 'add'])->name('addServe');
+            Route::get('/edit/{id}', [App\Http\Controllers\ServiceController::class, 'edit'])->name('editServe');
+            Route::post('/update/{id}', [App\Http\Controllers\ServiceController::class, 'update'])->name('updateServe');
+            Route::post('/delate/{id}', [App\Http\Controllers\ServiceController::class, 'delate'])->name('delateServe');
+    });
+
+        Route::prefix('userAction')->group(function () {
+            Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('showUsers');
+            Route::post('/add', [App\Http\Controllers\UserController::class, 'insert'])->name('addUser');
+            Route::get('/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('editUser');
+            Route::post('/update/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('updateUser');
+            Route::get('/delate/{id}', [App\Http\Controllers\UserController::class, 'delate'])->name('delateuser');
+    });
+
+        Route::prefix('structAction')->group(function () {
+        Route::get('/', [App\Http\Controllers\StructureController::class, 'index'])->name('showStucture');
+        Route::post('/add', [App\Http\Controllers\StructureController::class, 'insert'])->name('addStucture');
+        Route::get('/edit/{id}', [App\Http\Controllers\StructureController::class, 'edit'])->name('editStucture');
+        Route::post('/update/{id}', [App\Http\Controllers\StructureController::class, 'update'])->name('updateStucture');
+        Route::get('/delate/{id}', [App\Http\Controllers\StructureController::class, 'delate'])->name('delateStucture');
+    });
+});
 
 // Route::resource('serviceAction',App\Http\Controllers\ServicrControl::class);
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::view('category', 'category');

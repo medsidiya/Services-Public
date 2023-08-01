@@ -1,6 +1,12 @@
 @extends('layouts.auth')
 
+@section('css')
+<link rel="stylesheet" href="//cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+@endsection
 @section('content')
+
+@section('content')
+
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -36,8 +42,17 @@
                     <input type="text"class="form-control" name="periode" id=""  placeholder="periode">
                 </div>
                 <div class="form-group mb-2">
-                    <label for="">catgorie id</label>
-                    <input type="text" class="form-control" name="cteg_id" id=""  placeholder="cteg_id">
+                    <label for="">catgorie</label>
+                    <select class="form-control" name="cteg_id" id="">
+                        @foreach ($categories as $cat)
+                        <option value="{{ $cat->id}}">{{ $cat->nom}}</option>
+                        @endforeach
+                    </select>
+                    {{-- <input type="text" class="form-control" name="cteg_id" id=""  placeholder="cteg_id"> --}}
+                </div>
+                <div class="form-group mb-2">
+                    <label for="">struct id</label>
+                    <input type="text" class="form-control" name="struct_id" id=""  placeholder="structure id">
                 </div>
             </div>
               <div class="modal-footer">
@@ -51,7 +66,7 @@
 {{-- model for edit --}}
 
 {{-- @include('pages.updateServe') --}}
-<div class="container">
+{{-- <div class="container"> --}}
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -62,7 +77,7 @@
                 </h4>
             </div>
             <div class="card-body">
-    <table class="table">
+    <table class="table" id="serviceTable">
             <thead>
             <tr>
                 <th scope="col">Id</th>
@@ -71,7 +86,7 @@
                 <th scope="col">description</th>
                 <th scope="col">Prix</th>
                 <th scope="col">Periode</th>
-                <th scope="col">CategorieId</th>
+                {{-- <th scope="col">CategorieId</th> --}}
                 <th scope="col">Action</th>
             </tr>
             </thead>
@@ -84,13 +99,15 @@
                 <td>{{$service->descrption}}</td>
                 <td>{{$service->prix}}</td>
                 <td>{{$service->periode}}</td>
-                <td>{{$service->cteg_id}}</td>
-                <td class="d-flex justify-content-between">
+                {{-- <td>{{$service->cteg_id}}</td> --}}
+                <td class="d-flex justify-content-between align-items-center">
                     {{-- {{route('editServe',$service->id)}} --}}
-                    <a href="#editServe{{$service->id}}" class="btn btn-primary" data-bs-toggle="modal">Edit</a>
+                    <a href="#editServe{{$service->id}}" class="btn btn-primary mr-1" data-bs-toggle="modal">Edit</a>
+                    <a href="#delate{{$service->id}}" class="btn btn-danger" data-bs-toggle="modal">delate</a>
                     {{-- <button type="button" class="btn btn-primary float-end editbtn btn-sm " value="{{$service->id}}">Edit</button> --}}
-                    <a href="{{route('delateServe',$service->id)}}" class="btn btn-danger">Delate</a>
+                    {{-- <a href="{{route('delateServe',$service->id)}}" class="btn btn-danger">Delate</a> --}}
                     @include('pages.update')
+                    @include('pages.delateServe')
                 </td>
             </tr>
             @endforeach
@@ -101,5 +118,13 @@
     </div>
     </div>
 
-</div>
+{{-- </div> --}}
 @endsection
+
+@push('scripts')
+<script src="//cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+
+<script>
+    let table = new DataTable('#serviceTable');
+</script>
+@endpush

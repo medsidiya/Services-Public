@@ -24,7 +24,7 @@ body {
 }
 
 .navbar {
-    background-color:var(--dark-color);
+    background-color:#066e5b;
 }
 .navbar .navbar-nav .nav-link {
     color: white;
@@ -48,6 +48,14 @@ body {
 .navbar .navbar-toggler[aria-expanded="true"] {
     border-color: var(--green-color);
 }
+  /* Start Landing */
+.landing {
+    /* background-color: #616366; */
+    background-image: url('../imgs/landing.jpg');
+    background-size: cover;
+    min-height: calc(100vh);
+  }
+  /* End Landing */
 
 /* Start Services */
 .services {
@@ -57,7 +65,7 @@ body {
     padding: 10px;
     background-color: var(--section-color);
     border-radius: 10px;
-    background-color: #eff7fa;
+    background-color: #e6f1f3;
 }
 .services .row .icon svg {
     color: var(--green-color);
@@ -71,12 +79,14 @@ body {
 .services .row  a:hover {
     color: rgb(207, 38, 38);
 }
-
+.details {
+    color:  rgb(28, 225, 28);
+}
 /*  End Services */
 
 /* Start Footer  */
 .footer {
-    background-color: var(--dark-color);
+    background-color: #066e5b;
 }
 .footer .copyright > span {
     color: var(--green-color);

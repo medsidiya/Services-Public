@@ -6,7 +6,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <form action="{{route('updateCategorie', $categorie->id)}}" method="post">
+        <form action="{{route('updateCategorie', $categorie->id)}}" method="post" enctype="multipart/form-data">
             @csrf
             @method('post')
             <div class="modal-body">
@@ -18,6 +18,11 @@
                     <label for="">description</label>
                     <input type="text" class="form-control" name="description" id=""   value="{{$categorie->description}}">
                 </div>
+                <div class="mb-3">
+                    <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                    <input class="form-control" type="file" name="image" id="formFileMultiple">
+                    <img src="{{asset('imgs/icons/'. $categorie->image)}}" width="80" height="60" alt="" class="img img-responsive">
+                  </div>
             </div>
               <div class="modal-footer">
                 <button type="close" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

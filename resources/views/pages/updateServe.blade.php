@@ -11,9 +11,10 @@
         <input type="text" name="prix" id=""  value="{{$service->prix}}">
         <input type="text" name="periode" id=""  value="{{$service->periode}}">
         <input type="text" name="cteg_id" id=""  value="{{$service->cteg_id}}">
+        <input type="text" name="struct_id" id=""  value="{{$service->struct_id}}">
         <button type="submit">update</button>
     </form>
-</div> 
+</div>
 {{--
     <div class="modal fade" id="edit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
